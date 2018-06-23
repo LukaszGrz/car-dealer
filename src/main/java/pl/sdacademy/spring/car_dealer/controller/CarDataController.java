@@ -1,6 +1,9 @@
 package pl.sdacademy.spring.car_dealer.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import pl.sdacademy.spring.car_dealer.model.Vehicle;
 import pl.sdacademy.spring.car_dealer.service.CarDataService;
 
@@ -9,12 +12,24 @@ import java.util.List;
 import java.util.Scanner;
 
 @Controller
+@RequestMapping("/vehicles")
 public class CarDataController {
 
     private final CarDataService carDataService;
 
     public CarDataController(CarDataService carDataService) {
         this.carDataService = carDataService;
+    }
+
+    @RequestMapping("/{vehicleId}")
+    public String printVehicle(
+            @PathVariable("vehicleId") Long vehicleId,
+            Model model) {
+        Vehicle vehicle = carDataService.getVehicleById(vehicleId);
+        if (vehicle != null) {
+            model.addAttribute("vehicle", vehicle);
+        }
+        return "vehicleDetails";
     }
 
     public void printAvailableCars() {

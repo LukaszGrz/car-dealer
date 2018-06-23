@@ -25,4 +25,9 @@ public class DefaultCarDataService implements CarDataService {
     public Vehicle addVehicle(Vehicle newVehicleToBeSaved) {
         return vehicleRepository.save(newVehicleToBeSaved);
     }
+
+    @Override
+    public Vehicle getVehicleById(Long vehicleId) {
+        return vehicleRepository.findOne(vehicleId);
+    }
 }
