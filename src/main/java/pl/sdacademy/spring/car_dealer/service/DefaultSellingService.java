@@ -8,7 +8,6 @@ import pl.sdacademy.spring.car_dealer.repository.CustomerRepository;
 import pl.sdacademy.spring.car_dealer.repository.PurchaseRepository;
 import pl.sdacademy.spring.car_dealer.repository.VehicleRepository;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 
@@ -32,18 +31,23 @@ public class DefaultSellingService implements SellingService {
 //        Optional<Vehicle> notSoldVehicle =
 //                vehicleRepository.findNotSoldVehicle(vehicleId);
 //        Purchase purchase = notSoldVehicle
-//                .map(vehicle -> perfromSell(vehicle, customer, price))
+//                .map(vehicle -> performSell(vehicle, customer, price))
 //                .orElse(null);
 //        return purchase;
         return vehicleRepository.findNotSoldVehicle(vehicleId)
-                .map(vehicle -> perfromSell(vehicle, customer, price))
+                .map(vehicle -> performSell(vehicle, customer, price))
                 .orElse(null);
     }
 
-    private Purchase perfromSell(Vehicle veh, Customer customer, Long price) {
+    private Purchase performSell(Vehicle veh, Customer customer, Long price) {
         veh.setSold(true);
         vehicleRepository.save(veh);
-        Customer persistedCustomer = customerRepository.save(customer);
+        // z repozytorium spróbuj pobrać klienta po jego numerze dokumentu
+        Customer persistedCustomer = customerRepository
+                .findByDocumentNo(customer.getDocumentNo())
+                // a jeżeli nie było klienta z takim numerem dokumentu w bazie
+                // to użyj danych klienta, które dopiero co otrzymaliśmy
+                .orElseGet(() -> customerRepository.save(customer));
         Purchase purchase = new Purchase();
         purchase.setVehicle(veh);
         purchase.setCustomer(persistedCustomer);
