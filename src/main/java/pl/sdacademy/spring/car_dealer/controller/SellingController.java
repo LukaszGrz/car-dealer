@@ -2,8 +2,10 @@ package pl.sdacademy.spring.car_dealer.controller;
 
 import org.springframework.stereotype.Controller;
 import pl.sdacademy.spring.car_dealer.model.Customer;
+import pl.sdacademy.spring.car_dealer.model.Purchase;
 import pl.sdacademy.spring.car_dealer.service.SellingService;
 
+import java.util.List;
 import java.util.Scanner;
 
 @Controller
@@ -19,6 +21,13 @@ public class SellingController {
         Customer customer = getCustomerData();
         Long customerPrice = getCustomerPrice();
         sellingService.sell(vehicleId, customer, customerPrice);
+    }
+
+    public void showPurchaseHistory() {
+        System.out.print("Provide Document Number: ");
+        String documentNo = readInput();
+        List<Purchase> customerHistory = sellingService.loadHistory(documentNo);
+        customerHistory.forEach(System.out::println);
     }
 
     private Customer getCustomerData() {

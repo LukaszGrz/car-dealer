@@ -9,6 +9,7 @@ import pl.sdacademy.spring.car_dealer.repository.PurchaseRepository;
 import pl.sdacademy.spring.car_dealer.repository.VehicleRepository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,6 +38,11 @@ public class DefaultSellingService implements SellingService {
         return vehicleRepository.findNotSoldVehicle(vehicleId)
                 .map(vehicle -> performSell(vehicle, customer, price))
                 .orElse(null);
+    }
+
+    @Override
+    public List<Purchase> loadHistory(String documentNo) {
+        return purchaseRepository.findByCustomerDocumentNo(documentNo);
     }
 
     private Purchase performSell(Vehicle veh, Customer customer, Long price) {
