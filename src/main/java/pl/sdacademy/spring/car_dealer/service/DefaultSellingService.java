@@ -1,6 +1,7 @@
 package pl.sdacademy.spring.car_dealer.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.sdacademy.spring.car_dealer.model.Customer;
 import pl.sdacademy.spring.car_dealer.model.Purchase;
 import pl.sdacademy.spring.car_dealer.model.Vehicle;
@@ -28,6 +29,7 @@ public class DefaultSellingService implements SellingService {
         this.purchaseRepository = purchaseRepository;
     }
 
+    @Transactional
     public Purchase sell(Long vehicleId, final Customer customer, Long price) {
 //        Optional<Vehicle> notSoldVehicle =
 //                vehicleRepository.findNotSoldVehicle(vehicleId);
@@ -54,6 +56,9 @@ public class DefaultSellingService implements SellingService {
                 // a jeżeli nie było klienta z takim numerem dokumentu w bazie
                 // to użyj danych klienta, które dopiero co otrzymaliśmy
                 .orElseGet(() -> customerRepository.save(customer));
+        if (true) {
+            throw new RuntimeException("Przerwanie transakcji");
+        }
         Purchase purchase = new Purchase();
         purchase.setVehicle(veh);
         purchase.setCustomer(persistedCustomer);

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import pl.sdacademy.spring.car_dealer.controller.CarDataController;
 import pl.sdacademy.spring.car_dealer.controller.SellingController;
 
+import javax.annotation.PostConstruct;
 import java.util.Scanner;
 
 @Component
