@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${vehicle.manufacturer + ' ' + vehicle.model}"></title>
+</head>
+<body>
+<table th:object="${vehicle}">
+    <tr>
+        <td>Id</td>
+        <td th:text="*{id}"/>
+    </tr>
+    <tr>
+        <td>Manufacturer</td>
+        <td th:text="*{manufacturer}"/>
+    </tr>
+    <tr>
+        <td>Model</td>
+        <td th:text="*{model}"/>
+    </tr>
+    <tr>
+        <td>Production Year</td>
+        <td th:text="*{productionYear}"/>
+    </tr>
+    <tr>
+        <td>Mileage</td>
+        <td th:text="*{mileage}"/>
+    </tr>
+    <tr>
+        <td>Fuel</td>
+        <td th:text="*{fuel}"/>
+    </tr>
+    <tr>
+        <td>Price</td>
+        <td th:text="*{price}"/>
+    </tr>
+    <tr>
+        <td>Sold</td>
+        <td th:text="*{sold}"/>
+    </tr>
+</table>
+</body>
+</html>

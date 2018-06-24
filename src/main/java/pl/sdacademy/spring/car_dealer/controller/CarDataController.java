@@ -22,7 +22,7 @@ public class CarDataController {
     }
 
     @RequestMapping("/{vehicleId}")
-    public String printVehicle(
+    public String getCar(
             @PathVariable("vehicleId") Long vehicleId,
             Model model) {
         Vehicle vehicle = carDataService.getVehicleById(vehicleId);
