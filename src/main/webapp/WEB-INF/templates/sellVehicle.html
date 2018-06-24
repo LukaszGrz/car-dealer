@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Sell Vehicle</title>
+    <style>
+        .fieldError{
+            border-color: #ff0000;
+        }
+    </style>
 </head>
 <body>
 <h1>Sell Vehicle</h1>
@@ -12,31 +17,36 @@
         <tr>
             <td>Price</td>
             <td>
-                <input type="text" th:field="*{price}"/>
+                <input type="text" th:field="*{price}" th:errorclass="fieldError"/>
+                <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" />
             </td>
         </tr>
         <tr>
             <td>Customer Name</td>
             <td>
                 <input type="text" th:field="*{name}"/>
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" />
             </td>
         </tr>
         <tr>
             <td>Customer Last Name</td>
             <td>
                 <input type="text" th:field="*{surname}"/>
+                <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" />
             </td>
         </tr>
         <tr>
             <td>Customer Document No</td>
             <td>
                 <input type="text" th:field="*{documentNo}"/>
+                <span th:if="${#fields.hasErrors('documentNo')}" th:errors="*{documentNo}" />
             </td>
         </tr>
         <tr>
             <td>Customer Phone No</td>
             <td>
                 <input type="text" th:field="*{telephone}"/>
+                <span th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}" />
             </td>
         </tr>
         <tr>

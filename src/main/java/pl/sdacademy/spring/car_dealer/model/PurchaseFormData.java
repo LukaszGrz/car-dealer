@@ -1,11 +1,27 @@
 package pl.sdacademy.spring.car_dealer.model;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class PurchaseFormData {
+    @NotNull
+    @Min(1)
     private Long vehicleId;
+    @NotNull
+    @Min(value = 500, message = "To pole jest błędne")
     private Long price;
+    @NotNull
+    @Size(min = 1, max = 200)
     private String name;
+    @NotNull
+    @Size(min = 1, max = 200)
     private String surname;
+    @NotNull
+    @Size(min = 1, max = 200)
     private String telephone;
+    @NotNull
+    @Size(min = 1, max = 200)
     private String documentNo;
 
     public Long getVehicleId() {

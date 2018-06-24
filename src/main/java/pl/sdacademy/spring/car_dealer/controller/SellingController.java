@@ -2,12 +2,14 @@ package pl.sdacademy.spring.car_dealer.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.sdacademy.spring.car_dealer.model.Customer;
 import pl.sdacademy.spring.car_dealer.model.Purchase;
 import pl.sdacademy.spring.car_dealer.model.PurchaseFormData;
 import pl.sdacademy.spring.car_dealer.service.SellingService;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Scanner;
 
@@ -34,7 +36,12 @@ public class SellingController {
 
     @PostMapping
     public String sold(
-            @ModelAttribute("sellData") PurchaseFormData purchaseData) {
+            @Valid @ModelAttribute("sellData") PurchaseFormData purchaseData,
+            BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            // jeżeli wystąpił jakikolwiek błąd
+            return "sellVehicle";
+        }
         Customer customer = new Customer();
         customer.setName(purchaseData.getName());
         customer.setSurname(purchaseData.getSurname());
