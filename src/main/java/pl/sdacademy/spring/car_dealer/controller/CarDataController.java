@@ -2,9 +2,7 @@ package pl.sdacademy.spring.car_dealer.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import pl.sdacademy.spring.car_dealer.model.Vehicle;
 import pl.sdacademy.spring.car_dealer.service.CarDataService;
 
@@ -38,6 +36,19 @@ public class CarDataController {
         List<Vehicle> vehicles = carDataService.loadCarsThatCanBeSold();
         model.addAttribute("vehicleList", vehicles);
         return "vehicleList";
+    }
+
+    @GetMapping("/new")
+    public String addCarForm(Model model) {
+        model.addAttribute("addedVehicle", new Vehicle());
+        return "addVehicle";
+    }
+
+    @PostMapping
+    public String saveVehicle(
+            @ModelAttribute("addedVehicle") Vehicle vehicleToBeSaved) {
+        carDataService.addVehicle(vehicleToBeSaved);
+        return "redirect:/vehicles";
     }
 
     public void createCar() {
