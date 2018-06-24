@@ -3,6 +3,7 @@ package pl.sdacademy.spring.car_dealer.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.sdacademy.spring.car_dealer.model.PurchaseFormData;
 import pl.sdacademy.spring.car_dealer.model.Vehicle;
 import pl.sdacademy.spring.car_dealer.service.CarDataService;
 
@@ -49,6 +50,15 @@ public class CarDataController {
             @ModelAttribute("addedVehicle") Vehicle vehicleToBeSaved) {
         carDataService.addVehicle(vehicleToBeSaved);
         return "redirect:/vehicles";
+    }
+
+    @GetMapping("/{vehicleId}/sell")
+    public String sellVehicleForm(
+            @PathVariable("vehicleId") Long vehicleId,
+            Model model) {
+        model.addAttribute("vehicleId", vehicleId);
+        model.addAttribute("sellData", new PurchaseFormData());
+        return "sellVehicle";
     }
 
     public void createCar() {

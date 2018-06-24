@@ -61,9 +61,6 @@ public class DefaultSellingService implements SellingService {
                 // a jeżeli nie było klienta z takim numerem dokumentu w bazie
                 // to użyj danych klienta, które dopiero co otrzymaliśmy
                 .orElseGet(() -> customerRepository.save(customer));
-        if (true) {
-            throw new RuntimeException("Przerwanie transakcji");
-        }
         Purchase purchase = new Purchase();
         purchase.setVehicle(veh);
         purchase.setCustomer(persistedCustomer);

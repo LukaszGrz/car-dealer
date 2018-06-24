@@ -2,11 +2,10 @@ package pl.sdacademy.spring.car_dealer.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.sdacademy.spring.car_dealer.model.Customer;
 import pl.sdacademy.spring.car_dealer.model.Purchase;
+import pl.sdacademy.spring.car_dealer.model.PurchaseFormData;
 import pl.sdacademy.spring.car_dealer.service.SellingService;
 
 import java.util.List;
@@ -31,6 +30,21 @@ public class SellingController {
             model.addAttribute("p", purchase);
         }
         return "purchaseDetails";
+    }
+
+    @PostMapping
+    public String sold(
+            @ModelAttribute("sellData") PurchaseFormData purchaseData) {
+        Customer customer = new Customer();
+        customer.setName(purchaseData.getName());
+        customer.setSurname(purchaseData.getSurname());
+        customer.setDocumentNo(purchaseData.getDocumentNo());
+        customer.setTelephone(purchaseData.getTelephone());
+        sellingService.sell(
+                purchaseData.getVehicleId(),
+                customer,
+                purchaseData.getPrice());
+        return "redirect:/vehicles";
     }
 
     public void buyVehicle(Long vehicleId) {

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Sell Vehicle</title>
+</head>
+<body>
+<h1>Sell Vehicle</h1>
+<form th:action="@{/purchases}" th:object="${sellData}" method="post">
+    <input type="hidden" th:value="${vehicleId}" th:attr="name='vehicleId'"/>
+    <table>
+        <tr>
+            <td>Price</td>
+            <td>
+                <input type="text" th:field="*{price}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Customer Name</td>
+            <td>
+                <input type="text" th:field="*{name}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Customer Last Name</td>
+            <td>
+                <input type="text" th:field="*{surname}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Customer Document No</td>
+            <td>
+                <input type="text" th:field="*{documentNo}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Customer Phone No</td>
+            <td>
+                <input type="text" th:field="*{telephone}"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Sell Vehicle"/>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

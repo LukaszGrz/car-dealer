@@ -16,6 +16,7 @@
         <th>Fuel</th>
         <th>Price</th>
         <th>Info</th>
+        <th>Action</th>
     </tr>
     <tr th:each="vehicle , iterationInfo : ${vehicleList}">
         <td th:text="${vehicle.id}"/>
@@ -26,6 +27,7 @@
         <td th:text="${vehicle.fuel}"/>
         <td th:text="${vehicle.price}"/>
         <td th:text="${iterationInfo.count + ' of total ' + iterationInfo.size}"/>
+        <td><a th:href="@{/vehicles/{vehId}/sell(vehId=${vehicle.id})}" th:text="Sell"/></td>
     </tr>
 </table>
 
