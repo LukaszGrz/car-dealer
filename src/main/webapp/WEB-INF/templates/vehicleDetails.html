@@ -5,7 +5,7 @@
     <title th:text="${vehicle.manufacturer + ' ' + vehicle.model}"></title>
 </head>
 <body>
-<table th:object="${vehicle}">
+<table th:object="${vehicle}" style="border: 1px solid black">
     <tr>
         <td>Id</td>
         <td th:text="*{id}"/>

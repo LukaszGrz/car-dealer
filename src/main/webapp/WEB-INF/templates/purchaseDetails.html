@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html  xmlns:th="https://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Purchase Details</title>
+</head>
+<body>
+<h1 th:text="'Details of purchase no ' + ${p.id}"></h1>
+<table th:object="${p}">
+    <tr>
+        <td>Id</td>
+        <td th:text="*{id}"/>
+    </tr>
+    <tr>
+        <td>Date</td>
+        <td th:text="*{date}"/>
+    </tr>
+    <tr>
+        <td>Price</td>
+        <td th:text="*{price}"/>
+    </tr>
+    <tr>
+        <td>Vehicle</td>
+        <td>
+            <a th:href="@{/vehicles/{vehicleId}(vehicleId=*{vehicle.id})}">
+                <span th:text="*{vehicle.manufacturer + ' ' + vehicle.model}"/>
+            </a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
