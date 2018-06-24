@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Available Vehicles</title>
+</head>
+<body>
+<h1>Available Vehicles</h1>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Manufacturer</th>
+        <th>Model</th>
+        <th>Production Year</th>
+        <th>Mileage</th>
+        <th>Fuel</th>
+        <th>Price</th>
+        <th>Info</th>
+    </tr>
+    <tr th:each="vehicle , iterationInfo : ${vehicleList}">
+        <td th:text="${vehicle.id}"/>
+        <td th:text="${vehicle.manufacturer}"/>
+        <td th:text="${vehicle.model}"/>
+        <td th:text="${vehicle.productionYear}"/>
+        <td th:text="${vehicle.mileage}"/>
+        <td th:text="${vehicle.fuel}"/>
+        <td th:text="${vehicle.price}"/>
+        <td th:text="${iterationInfo.count + ' of total ' + iterationInfo.size}"/>
+    </tr>
+</table>
+
+</body>
+</html>

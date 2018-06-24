@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import pl.sdacademy.spring.car_dealer.model.Vehicle;
 import pl.sdacademy.spring.car_dealer.service.CarDataService;
 
@@ -32,19 +33,11 @@ public class CarDataController {
         return "vehicleDetails";
     }
 
-    public void printAvailableCars() {
+    @RequestMapping(method = RequestMethod.GET)
+    public String printAvailableCars(Model model) {
         List<Vehicle> vehicles = carDataService.loadCarsThatCanBeSold();
-        vehicles.sort(Comparator.comparing(Vehicle::getId));
-        vehicles.forEach(vehicle -> {
-            System.out.println(String.format("%d: %s %s from %d with %s powered engine and total mileage of %d for only %d!",
-                    vehicle.getId(),
-                    vehicle.getManufacturer(),
-                    vehicle.getModel(),
-                    vehicle.getProductionYear(),
-                    vehicle.getFuel(),
-                    vehicle.getMileage(),
-                    vehicle.getPrice()));
-        });
+        model.addAttribute("vehicleList", vehicles);
+        return "vehicleList";
     }
 
     public void createCar() {
